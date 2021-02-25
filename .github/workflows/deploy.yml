@@ -36,6 +36,7 @@ jobs:
         env:
           PUSH_TOKEN: ${{ secrets.REPO_KEY }}
         run: |
+          mkdir -p page
           python3 setup.py $PUSH_TOKEN
           git clone https://github.com/ghcdn/ghcdn.github.io gitdir
           cd gitdir
