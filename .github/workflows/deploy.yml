@@ -32,7 +32,7 @@ jobs:
           git config --global user.email "github@chan.im"
           git config --global user.name "ghcdn"
 
-       - name: Deploy
+      - name: Deploy
         env:
           PUSH_TOKEN: ${{ secrets.REPO_KEY }}
         run: |
