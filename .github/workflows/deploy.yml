@@ -9,11 +9,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     if: github.event.repository.owner.id == github.event.sender.id
-
-    steps:
-      - name: Install dependent
-        run: |
-          sudo pip3 install requests
       
       - name: Checkout source
         uses: actions/checkout@v2
@@ -44,4 +39,4 @@ jobs:
           mv ../index.html ../css ../page ./
           git add --all
           git commit -m "auto deploy"
-          git push
+          git push -u origin main
