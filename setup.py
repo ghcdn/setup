@@ -6,7 +6,7 @@ import requests
 def list_repos(token, page=1):
     url = 'https://api.github.com/user/repos'
     header = {'Authorization': f'token {token}'}
-    params = {'per_page': 100, 'page': page}
+    params = {'per_page': 100, 'page': page, 'sort': 'updated'}
     r = requests.get(url, headers=header, params=params)
     repos = r.json()
     name_list = []
@@ -32,7 +32,7 @@ def gen_page(name):
 def gen_index(name, info):
     if os.path.exists(f"{name}.html"):
         os.remove(f"{name}.html")
-    exclude_repos = ['img', 'ghcdn.github.io', 'shixian']
+    exclude_repos = ['img', 'ghcdn.github.io', 'shixian', 'setup']
     head = """<html lang="zh-CN"><head><meta charset="UTF-8">
            <meta name="viewport" content="width=device-width, initial-scale=1.0">
            <link href="./css/main.css" rel="stylesheet"><title>My Video</title></head><body>
