@@ -1,0 +1,39 @@
+name: Deploy html
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id
+
+    steps:
+      - name: Install dependent
+        run: |
+          sudo pip3 install requests
+      
+      - name: Checkout source
+        uses: actions/checkout@v2
+        with:
+          ref: master
+      
+      - name: Setup Git
+        env:
+          ACTION_DEPLOY_KEY: ${{ secrets.HTML_DEPLOY_KEY }}
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$ACTION_DEPLOY_KEY" > ~/.ssh/id_rsa
+          chmod 700 ~/.ssh
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          git config --global user.email "github@chan.im"
+          git config --global user.name "ghcdn"
+         
+       - name: Create Github repo
+        env:
+          PUSH_TOKEN: ${{ secrets.REPO_KEY }}
+        run: |
+          python3 setup.py $PUSH_TOKEN
