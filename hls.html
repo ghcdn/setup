@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>hls player|{name}</title>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+</head>
+
+<body>
+    <div id="movie" align="center">
+        <video id="video"  width=85% height="580" controls poster="https://cdn.jsdelivr.net/gh/ghcdn/{name}/img/pic0.jpg"></video>
+        <p>Thumbnails：</p>
+        <div id="thumb-pic">
+            <img src="https://cdn.jsdelivr.net/gh/ghcdn/{name}/img/thumb01.jpg" width=24%> <img src="https://cdn.jsdelivr.net/gh/ghcdn/{name}/img/thumb02.jpg" width=24%> <img src="https://cdn.jsdelivr.net/gh/ghcdn/{name}/img/thumb03.jpg" width=24%> <img src="https://cdn.jsdelivr.net/gh/ghcdn/{name}/img/thumb04.jpg" width=24%>
+            <img src="https://cdn.jsdelivr.net/gh/ghcdn/{name}/img/thumb05.jpg" width=24%> <img src="https://cdn.jsdelivr.net/gh/ghcdn/{name}/img/thumb06.jpg" width=24%> <img src="https://cdn.jsdelivr.net/gh/ghcdn/{name}/img/thumb07.jpg" width=24%> <img src="https://cdn.jsdelivr.net/gh/ghcdn/{name}/img/thumb08.jpg" width=24%>
+            <img src="https://cdn.jsdelivr.net/gh/ghcdn/{name}/img/thumb09.jpg" width=24%> <img src="https://cdn.jsdelivr.net/gh/ghcdn/{name}/img/thumb10.jpg" width=24%> <img src="https://cdn.jsdelivr.net/gh/ghcdn/{name}/img/thumb11.jpg" width=24%> <img src="https://cdn.jsdelivr.net/gh/ghcdn/{name}/img/thumb12.jpg" width=24%>
+            <img src="https://cdn.jsdelivr.net/gh/ghcdn/{name}/img/thumb13.jpg" width=24%> <img src="https://cdn.jsdelivr.net/gh/ghcdn/{name}/img/thumb14.jpg" width=24%> <img src="https://cdn.jsdelivr.net/gh/ghcdn/{name}/img/thumb15.jpg" width=24%> <img src="https://cdn.jsdelivr.net/gh/ghcdn/{name}/img/thumb16.jpg" width=24%>
+        </div>
+        <script>
+        var video = document.getElementById('video');
+        var videoSrc = 'https://cdn.jsdelivr.net/gh/ghcdn/{name}/res/index.m3u8';
+        if (Hls.isSupported()) {
+            var hls = new Hls();
+            hls.loadSource(videoSrc);
+            hls.attachMedia(video);
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            video.src = videoSrc;
+        }
+        </script>
+    </div>
+</body>
+
+</html>

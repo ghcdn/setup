@@ -1,0 +1,23 @@
+#content{
+	position: absolute;
+	text-align: center;
+	margin: auto;
+	top: 10;
+	left: 10;
+	right: 10;
+	bottom: 10;
+}
+.video_info{
+    margin: 2px;
+    width: 300px;
+    height: 200px;
+	float: left;
+	position: relative;
+}
+
+img{
+	position: relative;
+	display: block;
+	align-content: center;
+	height: 90%;
+}
