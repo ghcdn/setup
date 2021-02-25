@@ -37,3 +37,10 @@ jobs:
           PUSH_TOKEN: ${{ secrets.REPO_KEY }}
         run: |
           python3 setup.py $PUSH_TOKEN
+          git clone https://github.com/ghcdn/ghcdn.github.io gitdir
+          cd gitdir
+          rm -rf css page index.html
+          mv ../index.html ../css ../page ./
+          git add --all
+          git commit -m "auto deploy"
+          git push
