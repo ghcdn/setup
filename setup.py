@@ -45,12 +45,12 @@ def gen_index(name, info):
             continue
         html.write(f'<div id="{name}" class="video_info">')
         r = requests.head(
-            f"https://cdn.jsdelivr.net/gh/ghcdn/{name}@master/img/pic0.jpg")
+            f"https://cdn.jsdelivr.net/gh/ghcdn/{name}/img/pic0.jpg")
         if r.status_code == 200:
             html.write(
-                f'<img src="https://cdn.jsdelivr.net/gh/ghcdn/{name}@master/img/pic0.jpg">')
+                f'<img src="https://cdn.jsdelivr.net/gh/ghcdn/{name}/img/pic0.jpg">')
         else:
-            html.write(f'<img src="https://cdn.jsdelivr.net/gh/ghcdn/{name}@master/pic0.jpg">')
+            html.write(f'<img src="https://cdn.jsdelivr.net/gh/ghcdn/{name}/pic0.jpg">')
         html.write(f'<a href="{url}">{name}</a>  <a href="./page/{name}.html">Play Now</a>')
         html.write('</div>')
         print(name, "add index!")
