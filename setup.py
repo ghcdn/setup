@@ -51,7 +51,7 @@ def gen_index(name, info):
                 f'<img src="https://cdn.jsdelivr.net/gh/ghcdn/{name}@latest/img/pic0.jpg">')
         else:
             html.write(f'<img src="https://cdn.jsdelivr.net/gh/ghcdn/{name}@latest/pic0.jpg">')
-        html.write(f'<a href="{url}">{name}</a>  <a href="./page/{name}.html">Play Now</a>')
+        html.write(f'<a href="{url}">{name}</a>  <a href="./page/{name}.html"> Play Now </a>')
         html.write('</div>')
         print(name, "add index!")
         gen_page(name)
