@@ -32,7 +32,7 @@ def gen_page(name):
 def gen_index(name, info):
     if os.path.exists(f"{name}.html"):
         os.remove(f"{name}.html")
-    exclude_repos = ['img', 'ghcdn.github.io', 'shixian', 'setup']
+    exclude_repos = ['img', 'ghcdn.github.io', 'shixian', 'setup', 'JavSub']
     head = """<html lang="zh-CN"><head><meta charset="UTF-8">
            <meta name="viewport" content="width=device-width, initial-scale=1.0">
            <link href="./css/main.css" rel="stylesheet"><title>My Video</title></head><body>
@@ -48,10 +48,9 @@ def gen_index(name, info):
             f"https://cdn.jsdelivr.net/gh/ghcdn/{name}@latest/img/pic0.jpg")
         if r.status_code == 200:
             html.write(
-                f'<img src="https://cdn.jsdelivr.net/gh/ghcdn/{name}@latest/img/pic0.jpg" ')
+                f'<img src="https://cdn.jsdelivr.net/gh/ghcdn/{name}@latest/img/pic0.jpg" >')
         else:
-            html.write(f'<img src="https://cdn.jsdelivr.net/gh/ghcdn/{name}@latest/pic0.jpg" ')
-        html.write(f"onclick=window.open('https://cdn.jsdelivr.net/gh/ghcdn/{name}/res/index.m3u8','_self') >")
+            html.write(f'<img src="https://cdn.jsdelivr.net/gh/ghcdn/{name}@latest/pic0.jpg" >')
         html.write(f'<a href="{url}">{name}</a>  <a href="./page/{name}.html"> Play Now </a>')
         html.write('</div>')
         print(name, "add index!")
