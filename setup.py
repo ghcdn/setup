@@ -48,9 +48,10 @@ def gen_index(name, info):
             f"https://cdn.jsdelivr.net/gh/ghcdn/{name}@latest/img/pic0.jpg")
         if r.status_code == 200:
             html.write(
-                f'<img src="https://cdn.jsdelivr.net/gh/ghcdn/{name}@latest/img/pic0.jpg">')
+                f'<img src="https://cdn.jsdelivr.net/gh/ghcdn/{name}@latest/img/pic0.jpg" ')
         else:
-            html.write(f'<img src="https://cdn.jsdelivr.net/gh/ghcdn/{name}@latest/pic0.jpg">')
+            html.write(f'<img src="https://cdn.jsdelivr.net/gh/ghcdn/{name}@latest/pic0.jpg" ')
+        html.write(f"onclick=window.open('https://cdn.jsdelivr.net/gh/ghcdn/{name}/res/index.m3u8','_self') >")
         html.write(f'<a href="{url}">{name}</a>  <a href="./page/{name}.html"> Play Now </a>')
         html.write('</div>')
         print(name, "add index!")
