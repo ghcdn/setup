@@ -29,16 +29,18 @@ def gen_page(name):
     print(name, 'page generated!')
 
 
-def gen_index(name, info):
+def gen_index(name, info, pagination):
     if os.path.exists(f"{name}.html"):
         os.remove(f"{name}.html")
     exclude_repos = ['img', 'ghcdn.github.io', 'shixian', 'setup', 'JavSub']
+    # head of html
     head = """<html lang="zh-CN"><head><meta charset="UTF-8">
            <meta name="viewport" content="width=device-width, initial-scale=1.0">
            <link href="./css/main.css" rel="stylesheet"><title>My Video</title></head><body>
            """
     html = open(f'{name}.html', 'a')
     html.write(head)
+    # content of body
     html.write('<div id="content" >')
     for name, url in info:
         if name in exclude_repos:
@@ -50,16 +52,31 @@ def gen_index(name, info):
             html.write(
                 f'<img src="https://cdn.jsdelivr.net/gh/ghcdn/{name}@latest/img/pic0.jpg" >')
         else:
-            html.write(f'<img src="https://cdn.jsdelivr.net/gh/ghcdn/{name}@latest/pic0.jpg" >')
-        html.write(f'<a href="{url}">{name}</a>  <a href="./page/{name}.html"> Play Now </a>')
+            html.write(
+                f'<img src="https://cdn.jsdelivr.net/gh/ghcdn/{name}@latest/pic0.jpg" >')
+        html.write(
+            f'<a href="{url}">{name}</a>  <a href="./page/{name}.html"> Play Now </a>')
         html.write('</div>')
         print(name, "add index!")
         gen_page(name)
-    html.write('</div></body></html>')
+    html.write('</div>')
+    # index page
+    html.write('<div class="pagination">')
+    html.write('<ul class="pagination">')
+    for i in range(1, pagination + 1):
+        html.write('<li>')
+        html.write(f'<a href="./index{i}.html"> {i} </a>')
+    html.write('</ul>')
+    html.write('</div>')
+    html.write('</body></html>')
     html.close()
 
 
 if __name__ == '__main__':
     token = sys.argv[1]
-    info = list_repos(token, 2)
-    gen_index('index',info)
+    pagination = 2
+    info = list_repos(token)
+    gen_index('index', info, pagination)
+    for i in range(1, pagination + 1):
+        info = list_repos(token, i)
+        gen_index(f"index{i}", info, pagination)
