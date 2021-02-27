@@ -61,5 +61,5 @@ def gen_index(name, info):
 
 if __name__ == '__main__':
     token = sys.argv[1]
-    info = list_repos(token)
+    info = list_repos(token, 2)
     gen_index('index',info)
