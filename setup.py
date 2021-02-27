@@ -6,7 +6,7 @@ import requests
 def list_repos(token, page=1):
     url = 'https://api.github.com/user/repos'
     header = {'Authorization': f'token {token}'}
-    params = {'per_page': 100, 'page': page, 'sort': 'updated'}
+    params = {'per_page': 30, 'page': page, 'sort': 'updated'}
     r = requests.get(url, headers=header, params=params)
     repos = r.json()
     name_list = []
@@ -61,11 +61,12 @@ def gen_index(name, info, pagination):
         gen_page(name)
     html.write('</div>')
     # index page
-    html.write('<div class="pagination">')
+    html.write('<div id="pagination_box" class="pagination">')
     html.write('<ul class="pagination">')
     for i in range(1, pagination + 1):
         html.write('<li>')
         html.write(f'<a href="./index{i}.html"> {i} </a>')
+        html.write('</li>')
     html.write('</ul>')
     html.write('</div>')
     html.write('</body></html>')
@@ -74,7 +75,7 @@ def gen_index(name, info, pagination):
 
 if __name__ == '__main__':
     token = sys.argv[1]
-    pagination = 2
+    pagination = 4
     info = list_repos(token)
     gen_index('index', info, pagination)
     for i in range(1, pagination + 1):
