@@ -37,7 +37,7 @@ jobs:
           git clone git@github.com:ghcdn/ghcdn.github.io.git gitdir
           cd gitdir
           rm -rf css page index.html
-          mv ../index.html ../css ../page ./
+          mv ../*.html ../css ../page ./
           git add --all
           git commit -m "auto deploy"
           git push
