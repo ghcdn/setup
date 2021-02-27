@@ -80,5 +80,5 @@ if __name__ == '__main__':
     info = list_repos(token)
     gen_index('index', info, pagination)
     for i in range(1, pagination + 1):
-        page = list_repos(token, i)
+        info = list_repos(token, i)
         gen_index(f"index{i}", info, pagination)
