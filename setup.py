@@ -71,6 +71,7 @@ def gen_index(name, info, pagination):
     html.write('</div>')
     html.write('</body></html>')
     html.close()
+    print(name, "generated!")
 
 
 if __name__ == '__main__':
