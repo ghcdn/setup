@@ -47,7 +47,7 @@ def gen_index(name, info, pagination):
             continue
         html.write(f'<div id="{video_id}" class="video_info">')
         r = requests.head(
-            f"https://gh.chan.im/https://github.com/ghcdn/{video_id}/blob/master/img/pic0.jpg")
+            f"https://raw.githubusercontent.com/ghcdn/{video_id}/master/img/pic0.jpg")
         if r.status_code == 200:
             html.write(
                 f'<img src="https://gh.chan.im/https://github.com/ghcdn/{video_id}/blob/master/img/pic0.jpg" >')
