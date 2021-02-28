@@ -47,13 +47,13 @@ def gen_index(name, info, pagination):
             continue
         html.write(f'<div id="{video_id}" class="video_info">')
         r = requests.head(
-            f"https://cdn.jsdelivr.net/gh/ghcdn/{video_id}@latest/img/pic0.jpg")
+            f"https://gh.chan.im/https://github.com/ghcdn/{video_id}/blob/master/img/pic0.jpg")
         if r.status_code == 200:
             html.write(
-                f'<img src="https://cdn.jsdelivr.net/gh/ghcdn/{video_id}@latest/img/pic0.jpg" >')
+                f'<img src="https://gh.chan.im/https://github.com/ghcdn/{video_id}/blob/master/img/pic0.jpg" >')
         else:
             html.write(
-                f'<img src="https://cdn.jsdelivr.net/gh/ghcdn/{video_id}@latest/pic0.jpg" >')
+                f'<img src="https://gh.chan.im/https://github.com/ghcdn/{video_id}/blob/master/pic0.jpg" >')
         html.write(
             f'<a href="{url}">{video_id}</a>  <a href="./page/{video_id}.html"> Play Now </a>')
         html.write('</div>')
