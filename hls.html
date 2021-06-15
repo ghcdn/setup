@@ -8,17 +8,17 @@
 
 <body>
     <div id="movie" align="center">
-        <video id="video"  width=85% height="580" controls poster="https://cdn.chan.im/video/{name}/master/img/pic0.jpg"></video>
+        <video id="video"  width=85% height="580" controls poster="https://cdn.chan.im/video/{name}/online/img/pic0.jpg"></video>
         <p>Thumbnails：</p>
         <div id="thumb-pic">
-            <img src="https://cdn.chan.im/video/{name}/master/img/thumb01.jpg" width=24%> <img src="https://cdn.chan.im/video/{name}/master/img/thumb02.jpg" width=24%> <img src="https://cdn.chan.im/video/{name}/master/img/thumb03.jpg" width=24%> <img src="https://cdn.chan.im/video/{name}/master/img/thumb04.jpg" width=24%>
-            <img src="https://cdn.chan.im/video/{name}/master/img/thumb05.jpg" width=24%> <img src="https://cdn.chan.im/video/{name}/master/img/thumb06.jpg" width=24%> <img src="https://cdn.chan.im/video/{name}/master/img/thumb07.jpg" width=24%> <img src="https://cdn.chan.im/video/{name}/master/img/thumb08.jpg" width=24%>
-            <img src="https://cdn.chan.im/video/{name}/master/img/thumb09.jpg" width=24%> <img src="https://cdn.chan.im/video/{name}/master/img/thumb10.jpg" width=24%> <img src="https://cdn.chan.im/video/{name}/master/img/thumb11.jpg" width=24%> <img src="https://cdn.chan.im/video/{name}/master/img/thumb12.jpg" width=24%>
-            <img src="https://cdn.chan.im/video/{name}/master/img/thumb13.jpg" width=24%> <img src="https://cdn.chan.im/video/{name}/master/img/thumb14.jpg" width=24%> <img src="https://cdn.chan.im/video/{name}/master/img/thumb15.jpg" width=24%> <img src="https://cdn.chan.im/video/{name}/master/img/thumb16.jpg" width=24%>
+            <img src="https://cdn.chan.im/video/{name}/online/img/thumb01.jpg" width=24%> <img src="https://cdn.chan.im/video/{name}/online/img/thumb02.jpg" width=24%> <img src="https://cdn.chan.im/video/{name}/online/img/thumb03.jpg" width=24%> <img src="https://cdn.chan.im/video/{name}/online/img/thumb04.jpg" width=24%>
+            <img src="https://cdn.chan.im/video/{name}/online/img/thumb05.jpg" width=24%> <img src="https://cdn.chan.im/video/{name}/online/img/thumb06.jpg" width=24%> <img src="https://cdn.chan.im/video/{name}/online/img/thumb07.jpg" width=24%> <img src="https://cdn.chan.im/video/{name}/online/img/thumb08.jpg" width=24%>
+            <img src="https://cdn.chan.im/video/{name}/online/img/thumb09.jpg" width=24%> <img src="https://cdn.chan.im/video/{name}/online/img/thumb10.jpg" width=24%> <img src="https://cdn.chan.im/video/{name}/online/img/thumb11.jpg" width=24%> <img src="https://cdn.chan.im/video/{name}/online/img/thumb12.jpg" width=24%>
+            <img src="https://cdn.chan.im/video/{name}/online/img/thumb13.jpg" width=24%> <img src="https://cdn.chan.im/video/{name}/online/img/thumb14.jpg" width=24%> <img src="https://cdn.chan.im/video/{name}/online/img/thumb15.jpg" width=24%> <img src="https://cdn.chan.im/video/{name}/online/img/thumb16.jpg" width=24%>
         </div>
         <script>
         var video = document.getElementById('video');
-        var videoSrc = 'https://cdn.chan.im/video/{name}/master/res/index.m3u8';
+        var videoSrc = 'https://cdn.chan.im/video/{name}/online/res/index.m3u8';
         if (Hls.isSupported()) {
             var hls = new Hls();
             hls.loadSource(videoSrc);
