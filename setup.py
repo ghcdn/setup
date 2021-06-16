@@ -32,7 +32,7 @@ def gen_page(name):
 def gen_index(name, info, pagination):
     if os.path.exists(f"{name}.html"):
         os.remove(f"{name}.html")
-    exclude_repos = ['img', 'ghcdn.github.io', 'shixian', 'setup', 'JavSub']
+    exclude_repos = ['img', '', 'FFmpeg', 'ghcdn.github.io', 'shixian', 'setup', 'JavSub']
     # head of html
     head = """<html lang="zh-CN"><head><meta charset="UTF-8">
            <meta name="viewport" content="width=device-width, initial-scale=1.0">
