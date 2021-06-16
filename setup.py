@@ -50,10 +50,10 @@ def gen_index(name, info, pagination):
             f"https://raw.githubusercontent.com/ghcdn/{video_id}/master/img/pic0.jpg")
         if r.status_code == 200:
             html.write(
-                f'<img src="https://gh.chan.im/https://github.com/ghcdn/{video_id}/blob/master/img/pic0.jpg" >')
+                f'<img src="https://cdn.chan.im/video/{video_id}/online/img/pic0.jpg" >')
         else:
             html.write(
-                f'<img src="https://gh.chan.im/https://github.com/ghcdn/{video_id}/blob/master/pic0.jpg" >')
+                f'<img src="https://cdn.chan.im/video/{video_id}/online/pic0.jpg" >')
         html.write(
             f'<a href="{url}">{video_id}</a>  <a href="./page/{video_id}.html"> Play Now </a>')
         html.write('</div>')
