@@ -56,11 +56,12 @@ def gen_index(name, info):
     for video_id in info:
         if video_id in exclude_repos:
             continue
-        r = requests.head(f"https://raw.githubusercontent.com/ghcdn/{video_id}/master/img/pic0.jpg")
-        if r.status_code == 200:
+        if requests.head(f"https://raw.githubusercontent.com/ghcdn/{video_id}/master/img/pic0.jpg").status_code == 200:
             img = f"https://cdn.chan.im/video/{video_id}/online/img/pic0.jpg"
-        else:
+        elif requests.head(f"https://raw.githubusercontent.com/ghcdn/{video_id}/master/img/pic0.jpg").status_code == 200:
             img = f"https://cdn.chan.im/video/{video_id}/online/pic0.jpg"
+        else:
+            img = "https://a.cdn-hotels.com/gdcs/production9/d1032/e21751d2-bf2c-4bfe-ba26-846a5d5d1c27.jpg"
         new_item = gen_new_tag(f"./page/{video_id}.html", img, video_id)
         card_list.append(new_item)
         print(video_id, "add index!")
