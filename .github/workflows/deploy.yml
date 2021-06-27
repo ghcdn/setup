@@ -32,6 +32,7 @@ jobs:
         env:
           PUSH_TOKEN: ${{ secrets.REPO_KEY }}
         run: |
+          pip3 install bs4
           mkdir -p page
           python3 setup.py $PUSH_TOKEN
           git clone git@github.com:ghcdn/ghcdn.github.io.git gitdir
