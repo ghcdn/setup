@@ -32,12 +32,12 @@ def gen_new_tag(href, img_src, title):
     soup = BeautifulSoup("<li class=\"card\"></li>", "html.parser")
     original_tag = soup.li
     style = f"background-image: url({img_src});"
-    card_img_tag = soup.new_tag("a", attrs={
-                                "class": "card-image", "href": href, "target": "_blank", "style": style})
-    desc_tag = soup.new_tag(
-        "a", attrs={"class": "card-description", "href": href, "target": "_blank"})
+    card_img_tag = soup.new_tag("a", attrs={"class": "card-image", "href": href, "target": "_blank", "style": style})
+    img_tag = soup.new_tag("img", attrs={"src": img_src, "alt": title})
+    desc_tag = soup.new_tag("a", attrs={"class": "card-description", "href": href, "target": "_blank"})
     text_tag = soup.new_tag("p")
     text_tag.string = title
+    card_img_tag.append(img_tag)
     desc_tag.append(text_tag)
     original_tag.append(card_img_tag)
     original_tag.append(desc_tag)
