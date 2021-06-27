@@ -36,7 +36,7 @@ def gen_new_tag(href, img_src, title):
                                 "class": "card-image", "href": href, "target": "_blank", "style": style})
     desc_tag = soup.new_tag(
         "a", attrs={"class": "card-description", "href": href, "target": "_blank"})
-    text_tag = soup.new_tag("h2")
+    text_tag = soup.new_tag("p")
     text_tag.string = title
     desc_tag.append(text_tag)
     original_tag.append(card_img_tag)
