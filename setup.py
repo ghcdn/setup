@@ -61,7 +61,7 @@ def gen_index(name, info):
         elif requests.head(f"https://raw.githubusercontent.com/ghcdn/{video_id}/master/img/pic0.jpg").status_code == 200:
             img = f"https://cdn.chan.im/video/{video_id}/online/pic0.jpg"
         else:
-            img = "https://a.cdn-hotels.com/gdcs/production9/d1032/e21751d2-bf2c-4bfe-ba26-846a5d5d1c27.jpg"
+            img = "https://cdn.chan.im/video/FFmpeg/online/breach.jpg"
         new_item = gen_new_tag(f"./page/{video_id}.html", img, video_id)
         card_list.append(new_item)
         print(video_id, "add index!")
