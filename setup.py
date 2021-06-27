@@ -1,6 +1,7 @@
 import os
 import sys
 import requests
+from bs4 import BeautifulSoup
 
 
 def list_repos(token, page=1):
@@ -10,11 +11,9 @@ def list_repos(token, page=1):
     r = requests.get(url, headers=header, params=params)
     repos = r.json()
     name_list = []
-    url_list = []
     for repo in repos:
         name_list.append(repo['name'])
-        url_list.append(repo['html_url'])
-    return zip(name_list, url_list)
+    return name_list
 
 
 def gen_page(name):
@@ -29,56 +28,51 @@ def gen_page(name):
     print(name, 'page generated!')
 
 
-def gen_index(name, info, pagination):
+def gen_new_tag(href, img_src, title):
+    soup = BeautifulSoup("<li class=\"card\"></li>", "html.parser")
+    original_tag = soup.li
+    style = f"background-image: url({img_src});"
+    card_img_tag = soup.new_tag("a", attrs={
+                                "class": "card-image", "href": href, "target": "_blank", "style": style})
+    desc_tag = soup.new_tag(
+        "a", attrs={"class": "card-description", "href": href, "target": "_blank"})
+    text_tag = soup.new_tag("h2")
+    text_tag.string = title
+    desc_tag.append(text_tag)
+    original_tag.append(card_img_tag)
+    original_tag.append(desc_tag)
+    return original_tag
+
+def gen_index(name, info):
     if os.path.exists(f"{name}.html"):
         os.remove(f"{name}.html")
     exclude_repos = ['img', '', 'FFmpeg', 'ghcdn.github.io', 'shixian', 'setup', 'JavSub']
     # head of html
-    head = """<html lang="zh-CN"><head><meta charset="UTF-8">
-           <meta name="viewport" content="width=device-width, initial-scale=1.0">
-           <link href="./css/main.css" rel="stylesheet"><title>My Video</title></head><body>
-           """
-    html = open(f'{name}.html', 'a')
-    html.write(head)
+    html = open(f"{name}.html", "wb")
+    homepage = open("home.html", "r")
+    soup = BeautifulSoup(homepage.read(), "html.parser")
+    card_list = soup.body.ul
     # content of body
-    html.write('<div id="content" >')
-    for video_id, url in info:
+    for video_id in info:
         if video_id in exclude_repos:
             continue
-        html.write(f'<div id="{video_id}" class="video_info">')
-        r = requests.head(
-            f"https://raw.githubusercontent.com/ghcdn/{video_id}/master/img/pic0.jpg")
+        r = requests.head(f"https://raw.githubusercontent.com/ghcdn/{video_id}/master/img/pic0.jpg")
         if r.status_code == 200:
-            html.write(
-                f'<img src="https://cdn.chan.im/video/{video_id}/online/img/pic0.jpg" >')
+            img = f"https://cdn.chan.im/video/{video_id}/online/img/pic0.jpg"
         else:
-            html.write(
-                f'<img src="https://cdn.chan.im/video/{video_id}/online/pic0.jpg" >')
-        html.write(
-            f'<a href="{url}">{video_id}</a>  <a href="./page/{video_id}.html"> Play Now </a>')
-        html.write('</div>')
+            img = f"https://cdn.chan.im/video/{video_id}/online/pic0.jpg"
+        new_item = gen_new_tag(f"./page/{video_id}.html", img, video_id)
+        card_list.append(new_item)
         print(video_id, "add index!")
         gen_page(video_id)
-    html.write('</div>')
     # index page
-    html.write('<div id="pagination_box" class="pagination">')
-    html.write('<ul class="pagination">')
-    for i in range(1, pagination + 1):
-        html.write('<li>')
-        html.write(f'<a href="./index{i}.html"> {i} </a>')
-        html.write('</li>')
-    html.write('</ul>')
-    html.write('</div>')
-    html.write('</body></html>')
+    html.write(soup.encode("utf-8"))
     html.close()
+    homepage.close()
     print(f"{name}.html", "generated!")
 
 
 if __name__ == '__main__':
     token = sys.argv[1]
-    pagination = 4
     info = list_repos(token)
-    gen_index('index', info, pagination)
-    for i in range(1, pagination + 1):
-        page = list_repos(token, i)
-        gen_index(f"index{i}", page, pagination)
+    gen_index('index', info)
