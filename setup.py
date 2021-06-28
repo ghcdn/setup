@@ -45,8 +45,6 @@ def gen_card_tag(href, img_src, title):
 
 def gen_index(index_num, info, total_page):
     html_name = f"index{index_num}.html"
-    if index_num == 1:
-        html_name = "index.html" 
     if os.path.exists(html_name):
         os.remove(html_name)
     exclude_repos = ['img', '', 'FFmpeg', 'ghcdn.github.io', 'shixian', 'setup', 'JavSub']
@@ -96,6 +94,10 @@ def gen_index(index_num, info, total_page):
     page_list.append(page_tag)
     # save html
     html.write(soup.encode("utf-8"))
+    # if index1.html, add extra index.html
+    if index_num == 1:
+        with open("index.html", "wb") as f:
+            f.write(soup.encode("utf-8"))
     html.close()
     homepage.close()
     print(html_name, "generated!")
