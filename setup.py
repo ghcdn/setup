@@ -19,7 +19,12 @@ def list_repos(token, page=1):
 def gen_page(name):
     if os.path.exists(f'./page/{name}.html'):
         os.remove(f'./page/{name}.html')
-    hls = open('hls.html', 'r')
+    r = requests.head(f"https://raw.githubusercontent.com/ghcdn/{name}/master/img/thumb01.jpg")
+    if r.status_code == 200:
+        hls_name = "hls-thumb.html"
+    else:
+        hls_name = "hls.html"
+    hls = open(hls_name, 'r')
     page = open(f'./page/{name}.html', 'a')
     content = hls.read().replace('{name}', name)
     page.write(content)
