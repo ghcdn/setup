@@ -28,7 +28,7 @@ def gen_page(name):
     print(name, 'page generated!')
 
 
-def gen_new_tag(href, img_src, title):
+def gen_card_tag(href, img_src, title):
     soup = BeautifulSoup("<li class=\"card\"></li>", "html.parser")
     original_tag = soup.li
     style = f"background-image: url({img_src});"
@@ -43,16 +43,18 @@ def gen_new_tag(href, img_src, title):
     original_tag.append(desc_tag)
     return original_tag
 
-def gen_index(name, info):
-    if os.path.exists(f"{name}.html"):
-        os.remove(f"{name}.html")
+def gen_index(index_num, info, total_page):
+    html_name = f"index{index_num}.html"
+    if index_num == 1:
+        html_name = "index.html" 
+    if os.path.exists(html_name):
+        os.remove(html_name)
     exclude_repos = ['img', '', 'FFmpeg', 'ghcdn.github.io', 'shixian', 'setup', 'JavSub']
-    # head of html
-    html = open(f"{name}.html", "wb")
+    html = open(html_name, "wb")
     homepage = open("home.html", "r")
     soup = BeautifulSoup(homepage.read(), "html.parser")
+    # add iterm to card-list
     card_list = soup.body.ul
-    # content of body
     for video_id in info:
         if video_id in exclude_repos:
             continue
@@ -62,18 +64,42 @@ def gen_index(name, info):
             img = f"https://cdn.chan.im/video/{video_id}/online/pic0.jpg"
         else:
             img = "https://cdn.chan.im/video/FFmpeg/online/breach.jpg"
-        new_item = gen_new_tag(f"./page/{video_id}.html", img, video_id)
+        new_item = gen_card_tag(f"./page/{video_id}.html", img, video_id)
         card_list.append(new_item)
-        print(video_id, "add index!")
+        print(video_id, "had added to index!")
         gen_page(video_id)
-    # index page
+    # pagination
+    page_list = soup.find("div",{"class": "pagination"}).ul
+    # prev
+    page_tag = soup.new_tag("li")
+    href_tag = soup.new_tag("a", attrs={"href": index_num - 1 if index_num - 1 > 0 else "#"})
+    page_tag.append(href_tag)
+    page_list.append(page_tag)
+    # page num
+    for i in range(1, total_page + 1):
+        if i == index_num:
+            page_tag = soup.new_tag("li", attrs={"class": "active"})
+        else:
+            page_tag = soup.new_tag("li")
+        href_tag = soup.new_tag("a", attrs={"href": i})
+        page_tag.append(href_tag)
+        page_list.append(page_tag)
+    # next
+    page_tag = soup.new_tag("li")
+    href_tag = soup.new_tag("a", attrs={"href": index_num + 1 if index_num + 1 <= total_page else "#"})
+    page_tag.append(href_tag)
+    page_list.append(page_tag)
+    # save html
     html.write(soup.encode("utf-8"))
     html.close()
     homepage.close()
-    print(f"{name}.html", "generated!")
+    print(html_name, "generated!")
 
 
 if __name__ == '__main__':
     token = sys.argv[1]
-    info = list_repos(token)
-    gen_index('index', info)
+    total_page = 4
+    for i in range(1, total_page + 1):
+        info = list_repos(token, i)
+        gen_index(i, info, total_page)
+
