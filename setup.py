@@ -72,7 +72,9 @@ def gen_index(index_num, info, total_page):
     page_list = soup.find("div",{"class": "pagination"}).ul
     # prev
     page_tag = soup.new_tag("li")
-    href_tag = soup.new_tag("a", attrs={"href": index_num - 1 if index_num - 1 > 0 else "#"})
+    page_num = index_num - 1 if index_num - 1 > 0 else "#"
+    page_name = f"index{page_num}.html"
+    href_tag = soup.new_tag("a", attrs={"href": page_name})
     page_tag.append(href_tag)
     page_list.append(page_tag)
     # page num
@@ -81,12 +83,15 @@ def gen_index(index_num, info, total_page):
             page_tag = soup.new_tag("li", attrs={"class": "active"})
         else:
             page_tag = soup.new_tag("li")
-        href_tag = soup.new_tag("a", attrs={"href": i})
+        page_name = f"index{i}.html"
+        href_tag = soup.new_tag("a", attrs={"href": page_name})
         page_tag.append(href_tag)
         page_list.append(page_tag)
     # next
     page_tag = soup.new_tag("li")
-    href_tag = soup.new_tag("a", attrs={"href": index_num + 1 if index_num + 1 <= total_page else "#"})
+    page_num = index_num + 1 if index_num + 1 <= total_page else "#"
+    page_name = f"index{page_num}.html"
+    href_tag = soup.new_tag("a", attrs={"href": page_name})
     page_tag.append(href_tag)
     page_list.append(page_tag)
     # save html
