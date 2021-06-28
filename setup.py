@@ -60,7 +60,7 @@ def gen_index(index_num, info, total_page):
             continue
         if requests.head(f"https://raw.githubusercontent.com/ghcdn/{video_id}/master/img/pic0.jpg").status_code == 200:
             img = f"https://cdn.chan.im/video/{video_id}/online/img/pic0.jpg"
-        elif requests.head(f"https://raw.githubusercontent.com/ghcdn/{video_id}/master/img/pic0.jpg").status_code == 200:
+        elif requests.head(f"https://raw.githubusercontent.com/ghcdn/{video_id}/master/pic0.jpg").status_code == 200:
             img = f"https://cdn.chan.im/video/{video_id}/online/pic0.jpg"
         else:
             img = "https://cdn.chan.im/video/FFmpeg/online/breach.jpg"
@@ -72,7 +72,7 @@ def gen_index(index_num, info, total_page):
     page_list = soup.find("div",{"class": "pagination"}).ul
     # prev
     page_tag = soup.new_tag("li")
-    page_num = index_num - 1 if index_num - 1 > 0 else "#"
+    page_num = index_num - 1 if index_num - 1 > 0 else index_num
     page_name = f"index{page_num}.html"
     href_tag = soup.new_tag("a", attrs={"href": page_name})
     page_tag.append(href_tag)
@@ -89,7 +89,7 @@ def gen_index(index_num, info, total_page):
         page_list.append(page_tag)
     # next
     page_tag = soup.new_tag("li")
-    page_num = index_num + 1 if index_num + 1 <= total_page else "#"
+    page_num = index_num + 1 if index_num + 1 <= total_page else index_num
     page_name = f"index{page_num}.html"
     href_tag = soup.new_tag("a", attrs={"href": page_name})
     page_tag.append(href_tag)
