@@ -17,7 +17,7 @@
 }
 
 .xlarge {
-  width: 65rem;
+  width: 90%;
 }
 
 .large {
@@ -25,16 +25,16 @@
 }
 
 .middle {
-  width: 32rem;
+  width: 90%;
 }
 
 .small {
-  width: 22rem;
+  width: 90%;
 }
 
 
 .xsmall {
-  width: 14rem;
+  width: 90%;
 }
 
 .container ul, li {
