@@ -17,8 +17,6 @@ def list_repos(token, page=1):
 
 
 def gen_page(name):
-    if os.path.exists(f'./page/{name}.html'):
-        os.remove(f'./page/{name}.html')
     r = requests.head(f"https://raw.githubusercontent.com/ghcdn/{name}/master/img/thumb01.jpg")
     if r.status_code == 200:
         hls_name = "hls-thumb.html"
@@ -50,8 +48,6 @@ def gen_card_tag(href, img_src, title):
 
 def gen_index(index_num, info, total_page):
     html_name = f"index{index_num}.html"
-    if os.path.exists(html_name):
-        os.remove(html_name)
     exclude_repos = ['img', '', 'FFmpeg', 'ghcdn.github.io', 'shixian', 'setup', 'JavSub']
     html = open(html_name, "wb")
     homepage = open("home.html", "r")

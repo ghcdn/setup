@@ -39,6 +39,7 @@ jobs:
           cd gitdir
           rm -rf css page index.html
           mv ../*.html ../css ../page ./
+          rm hls*.html home.html
           git add --all
           git commit -m "auto deploy"
           git push
