@@ -48,7 +48,7 @@ def gen_card_tag(href, img_src, title):
 
 def gen_index(index_num, info, total_page):
     html_name = f"index{index_num}.html"
-    exclude_repos = ['img', 'My-Neighbor-Totoro', 'FFmpeg', 'ghcdn.github.io', 'setup', 'JavSub']
+    exclude_repos = ['img', 'video-dl', 'My-Neighbor-Totoro', 'FFmpeg', 'ghcdn.github.io', 'setup', 'JavSub']
     html = open(html_name, "wb")
     homepage = open("home.html", "r")
     soup = BeautifulSoup(homepage.read(), "html.parser")
